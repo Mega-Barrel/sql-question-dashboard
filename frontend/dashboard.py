@@ -12,6 +12,8 @@ st.set_page_config(
     }
 )
 
+# Set title
+st.title('Daily SQL Question Tracker')
 
 conn = st.experimental_connection(
     "sql_dashboard",
