@@ -1,6 +1,7 @@
 """ streamlit_app.py"""
 
 import streamlit as st
+import psycopg2
 
 st.set_page_config(
     page_title="SQL Question Tracker",
@@ -15,10 +16,20 @@ st.set_page_config(
 # Set title
 st.title('Daily SQL Question Tracker')
 
-conn = st.experimental_connection(
-    "sql_dashboard",
-    type="sql"
-)
+@st.cache_resource
+def init_connection():
+    return psycopg2.connect(**st.secrets["postgres"])
 
-df = conn.query("SELECT * FROM daily_solved ORDER BY created_at DESC")
-st.dataframe(df)
+# Initialize connection object
+conn = init_connection()
+
+# Uses st.cache_data to only rerun when the query changes or after 10 min.
+@st.cache_data(ttl=600)
+def run_query(query):
+    with conn.cursor() as cur:
+        cur.execute(query)
+        return cur.fetchall()
+
+# Get question solved by company
+df = run_query("SELECT * from companies_solved")
+st.dataframe(df, use_container_width=True)
