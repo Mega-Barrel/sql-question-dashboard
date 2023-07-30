@@ -3,3 +3,6 @@ st-env
 
 # .streamlit
 .streamlit
+
+# pycache
+*__pycache__
