@@ -4,8 +4,15 @@ import streamlit as st
 
 # Import for pages
 from frontend.about import about_page
-from frontend.graphs import line_chart_, pie_chart_, bar_chart_
-from frontend.raw_data import raw_table, clean_table
+from frontend.graphs import (
+    line_chart_, 
+    pie_chart_, 
+    bar_chart_
+)
+from frontend.raw_data import (
+    raw_table, 
+    clean_table
+)
 
 st.set_page_config(
     page_title="SQL Question Tracker",
