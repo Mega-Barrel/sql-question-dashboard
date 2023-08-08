@@ -5,12 +5,12 @@ import streamlit as st
 # Import for pages
 from frontend.about import about_page
 from frontend.graphs import (
-    line_chart_, 
-    pie_chart_, 
+    line_chart_,
+    pie_chart_,
     bar_chart_
 )
 from frontend.raw_data import (
-    raw_table, 
+    raw_table,
     clean_table
 )
 
@@ -55,11 +55,11 @@ with graphs:
 
     # Specify 2 column
     col1, col2 = st.columns(2)
-    
+
     with col1.chat_message('user'):
         st.write("Question Solved | Difficulty % 🎯")
         pie_chart_(col1, get_connection())
-    
+
     with col2.chat_message('user'):
         st.write("Question Solved | Company 🏢")
         bar_chart_(col2, get_connection())
@@ -68,7 +68,7 @@ with raw_data:
     with st.chat_message("user"):
         st.write("Raw Data 📔")
         raw_table(st, get_connection())
-    
+
     with st.chat_message("user"):
         st.write("Transformed Data 📖")
         clean_table(st, get_connection())
